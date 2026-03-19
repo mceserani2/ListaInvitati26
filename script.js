@@ -41,7 +41,7 @@ function popolaLista(){
             item.classList.remove('conf');
         }
         chk.addEventListener('input',(event) => {
-            inv.confermato = event.target.checked;
+            inv.confermato = chk.checked;
             if (inv.confermato){
                 item.classList.add('conf');
                 item.classList.remove('n_conf');

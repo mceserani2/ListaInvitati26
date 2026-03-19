@@ -50,34 +50,46 @@ function popolaLista(){
     }
 
     invitati.forEach((inv,pos) => {
-        const item = document.createElement('li');
-        item.innerHTML = `${inv.cognome} ${inv.nome} - ${inv.email} <input type="checkbox"> <button>X</button>`;
-        const chk = item.querySelector('input[type="checkbox"]');
-        if (inv.confermato === true){
-            chk.checked = true;
-            item.classList.add('conf');
-            item.classList.remove('n_conf');
-        } else {
-            chk.checked = false;
-            item.classList.add('n_conf');
-            item.classList.remove('conf');
+        const select = document.querySelector("#filtro");
+        const cerca = document.querySelector("#search").value.trim();
+        if (!cerca || `${inv.cognome} ${inv.nome} ${inv.email}`.contains(cerca)){
+            if (select.value === "tutti" || (select.value === "confermati" && inv.confermato) || (select.value === "non_confermati" && !inv.confermato)){
+                const item = document.createElement('li');
+                item.innerHTML = `${inv.cognome} ${inv.nome} - ${inv.email} <input type="checkbox"> <button>X</button>`;
+                const chk = item.querySelector('input[type="checkbox"]');
+                if (inv.confermato === true){
+                    chk.checked = true;
+                    item.classList.add('conf');
+                    item.classList.remove('n_conf');
+                } else {
+                    chk.checked = false;
+                    item.classList.add('n_conf');
+                    item.classList.remove('conf');
+                }
+                chk.addEventListener('input',(event) => {
+                    inv.confermato = chk.checked;
+                    if (inv.confermato){
+                        item.classList.add('conf');
+                        item.classList.remove('n_conf');
+                    } else {
+                        item.classList.add('n_conf');
+                        item.classList.remove('conf');
+                    }            
+                });
+                const btn = item.querySelector('button');
+                btn.addEventListener('click', (event) => {
+                    invitati.splice(pos,1);
+                    popolaLista();
+                });
+                list.appendChild(item);
+            }
         }
-        chk.addEventListener('input',(event) => {
-            inv.confermato = chk.checked;
-            if (inv.confermato){
-                item.classList.add('conf');
-                item.classList.remove('n_conf');
-            } else {
-                item.classList.add('n_conf');
-                item.classList.remove('conf');
-            }            
-        });
-        const btn = item.querySelector('button');
-        btn.addEventListener('click', (event) => {
-            invitati.splice(pos,1);
-            popolaLista();
-        });
-        list.appendChild(item);
     });
 
 }
+
+const select = document.querySelector("#filtro");
+select.addEventListener('change',popolaLista);
+
+const search = document.querySelector("#search");
+search.addEventListener('change',popolaLista);

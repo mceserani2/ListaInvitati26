@@ -20,5 +20,42 @@ const formInvitati = document.querySelector("#form_invitati");
 formInvitati.addEventListener('submit', aggiungiInvitato);
 
 function popolaLista(){
-    // To do
+    
+    const list = document.querySelector('#lista_invitati');
+
+    while(list.firstChild){
+        list.removeChild(list.firstChild);
+    }
+
+    invitati.forEach((inv,pos) => {
+        const item = document.createElement('li');
+        item.innerHTML = `${inv.cognome} ${inv.nome} - ${inv.email} <input type="checkbox"> <button>X</button>`;
+        const chk = item.querySelector('input[type="checkbox"]');
+        if (inv.confermato === true){
+            chk.checked = true;
+            item.classList.add('conf');
+            item.classList.remove('n_conf');
+        } else {
+            chk.checked = false;
+            item.classList.add('n_conf');
+            item.classList.remove('conf');
+        }
+        chk.addEventListener('input',(event) => {
+            inv.confermato = event.target.checked;
+            if (inv.confermato){
+                item.classList.add('conf');
+                item.classList.remove('n_conf');
+            } else {
+                item.classList.add('n_conf');
+                item.classList.remove('conf');
+            }            
+        });
+        const btn = item.querySelector('button');
+        btn.addEventListener('click', (event) => {
+            invitati.splice(pos,1);
+            popolaLista();
+        });
+        list.appendChild(item);
+    });
+
 }

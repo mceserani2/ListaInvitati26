@@ -19,6 +19,28 @@ function aggiungiInvitato(e) {
 const formInvitati = document.querySelector("#form_invitati");
 formInvitati.addEventListener('submit', aggiungiInvitato);
 
+const btn_ordina = document.querySelector("#btn-ordina");
+btn_ordina.addEventListener('click', (event) => {
+    invitati.sort((a,b) => {
+        if (a.cognome < b.cognome){
+            return -1;
+        } else {
+            if (a.cognome > b.cognome) {
+                return 1;
+            } else {
+                if (a.nome < b.nome){
+                    return -1;
+                } else if (a.nome > b.nome){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    });
+    popolaLista();
+});
+
 function popolaLista(){
     
     const list = document.querySelector('#lista_invitati');

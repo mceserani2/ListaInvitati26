@@ -1,5 +1,12 @@
+// Dichiarazione variabili
 const invitati = [];
 
+const formInvitati = document.querySelector("#form_invitati");
+const btn_ordina = document.querySelector("#btn-ordina");
+const select = document.querySelector("#filtro");
+const search = document.querySelector("#search");
+
+// Dichiarazione funzioni
 function aggiungiInvitato(e) {
     
     e.preventDefault();
@@ -19,37 +26,6 @@ function aggiungiInvitato(e) {
     popolaLista();
     formInvitati.reset();
 }
-
-const formInvitati = document.querySelector("#form_invitati");
-formInvitati.addEventListener('submit', aggiungiInvitato);
-
-const btn_ordina = document.querySelector("#btn-ordina");
-
-btn_ordina.addEventListener('click', (event) => {
-    
-    invitati.sort((a,b) => {
-        
-        if (a.cognome < b.cognome){
-            return -1;
-        } else {
-        
-            if (a.cognome > b.cognome) {
-                return 1;
-            } else {
-        
-                if (a.nome < b.nome){
-                    return -1;
-                } else if (a.nome > b.nome){
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        }
-    });
-
-    popolaLista();
-});
 
 function popolaLista(){
     
@@ -119,8 +95,34 @@ function popolaLista(){
 
 }
 
-const select = document.querySelector("#filtro");
-select.addEventListener('change',popolaLista);
+// Implementazione funzionalità
+formInvitati.addEventListener('submit', aggiungiInvitato);
 
-const search = document.querySelector("#search");
+btn_ordina.addEventListener('click', (event) => {
+    
+    invitati.sort((a,b) => {
+        
+        if (a.cognome < b.cognome){
+            return -1;
+        } else {
+        
+            if (a.cognome > b.cognome) {
+                return 1;
+            } else {
+        
+                if (a.nome < b.nome){
+                    return -1;
+                } else if (a.nome > b.nome){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    });
+
+    popolaLista();
+});
+
+select.addEventListener('change',popolaLista);
 search.addEventListener('change',popolaLista);

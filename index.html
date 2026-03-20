@@ -5,41 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione Lista Invitati</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Gestione Lista Invitati</h1>
-    <div class="form-container">
+    <h1 class="text-center mt-5">Gestione Lista Invitati</h1>
+    
+    <div class="form-container m-5 p-4 border rounded">
         <h2>Aggiungi un Invitato</h2>
-        <form id="form_invitati" action="#">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <label for="cognome">Cognome:</label>
-            <input type="text" id="cognome" name="cognome" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Email" required>
-            <button type="submit" id="btn-aggiungi" class="btn">Aggiungi Invitato</button>
+
+        <form id="form_invitati" action="#" class="mt-4">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Nome" class="form-control mb-3" required>
+            
+            <label for="cognome" class="form-label">Cognome:</label>
+            <input type="text" id="cognome" name="cognome" placeholder="Cognome" class="form-control mb-3" required>
+            
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email" class="form-control mb-3" required>
+            
+            <div class="d-flex justify-content-end">
+                <button type="submit" id="btn-aggiungi" class="btn btn-primary mt-3">Aggiungi Invitato</button>
+            </div>
         </form>
-        <hr/>
     </div>
-    <div class="tools-container">
-        <h2>Lista degli Invitati</h2>
-        <button id="btn-ordina" class="btn">Ordina</button>
-        <span id="ricerca-testo">
-            <label for="search">Cerca:</label>
-            <input type="text" id="search" placeholder="Cerca...">
-        </span>
-        <span id="filtra">
-            <label for="filtro">Filtra:</label>
-            <select id="filtro">
-                <option value="tutti">Tutti</option>
-                <option value="confermati">Confermati</option>
-                <option value="non_confermati">Non confermati</option>
-            </select>
-        </span>
+    
+    <div class="tools-container p-4 mx-5 border rounded">
+        <section class="d-lg-flex justify-content-between align-items-center">
+            <h2 class="mb-4 mb-lg-0">Lista degli Invitati</h2>
+            
+            <div class="d-flex justify-content-between align-items-center gap-4">
+                <span id="ricerca-testo">
+                    <input type="search" class="form-control" id="search" placeholder="Cerca...">
+                </span>
+                
+                <span id="filtra">
+                    <select id="filtro" class="form-select">
+                        <option value="tutti">Tutti</option>
+                        <option value="confermati">Confermati</option>
+                        <option value="non_confermati">Non confermati</option>
+                    </select>
+                </span>
+                
+                <button id="btn-ordina" class="btn btn-primary">Ordina</button>
+            </div>
+        </section>
+        
+        <div class="list-container mt-3">
+            <ul id="lista_invitati" class="list-unstyled"></ul>
+        </div>
     </div>
-    <div class="list-container">
-        <ul id="lista_invitati"></ul>
-    </div>
+    
+    
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

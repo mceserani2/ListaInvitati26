@@ -1,4 +1,12 @@
-const invitati = [];
+let invitati = [];
+
+window.addEventListener('load',() => {
+    const stored = JSON.parse(localStorage.getItem('listaInvitati26'));
+    if (stored) {
+        invitati = stored;
+        popolaLista();
+    }
+});
 
 function aggiungiInvitato(e) {
     e.preventDefault();
@@ -74,7 +82,8 @@ function popolaLista(){
                     } else {
                         item.classList.add('n_conf');
                         item.classList.remove('conf');
-                    }            
+                    }
+                    salvaLista();        
                 });
                 const btn = item.querySelector('button');
                 btn.addEventListener('click', (event) => {
@@ -86,6 +95,8 @@ function popolaLista(){
         }
     });
 
+    salvaLista();
+
 }
 
 const select = document.querySelector("#filtro");
@@ -93,3 +104,7 @@ select.addEventListener('change',popolaLista);
 
 const search = document.querySelector("#search");
 search.addEventListener('input',popolaLista);
+
+function salvaLista() {
+    localStorage.setItem('listaInvitati26',JSON.stringify(invitati));
+}

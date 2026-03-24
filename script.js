@@ -52,7 +52,7 @@ function popolaLista(){
     invitati.forEach((inv,pos) => {
         const select = document.querySelector("#filtro");
         const cerca = document.querySelector("#search").value.trim();
-        if (!cerca || `${inv.cognome} ${inv.nome} ${inv.email}`.contains(cerca)){
+        if (!cerca || `${inv.cognome} ${inv.nome} ${inv.email}`.includes(cerca)){
             if (select.value === "tutti" || (select.value === "confermati" && inv.confermato) || (select.value === "non_confermati" && !inv.confermato)){
                 const item = document.createElement('li');
                 item.innerHTML = `${inv.cognome} ${inv.nome} - ${inv.email} <input type="checkbox"> <button>X</button>`;
@@ -92,4 +92,4 @@ const select = document.querySelector("#filtro");
 select.addEventListener('change',popolaLista);
 
 const search = document.querySelector("#search");
-search.addEventListener('change',popolaLista);
+search.addEventListener('input',popolaLista);
